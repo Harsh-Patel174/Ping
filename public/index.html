@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anonymous Chat</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("pingTheme");
+            document.documentElement.dataset.theme =
+                savedTheme === "dark" ? "dark" : "light";
+        })();
+    </script>
+
+</head>
+
+<body>
+
+    <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Switch to dark theme"
+        title="Switch theme"
+    >
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+        <span class="theme-label">Dark</span>
+    </button>
+
+    <main class="app">
+
+        <!-- USERNAME SCREEN -->
+        <section class="screen" id="usernameScreen">
+
+            <div class="card">
+
+                <div class="logo">
+                    💬
+                </div>
+
+                <h1>Anonymous Chat</h1>
+
+                <p class="subtitle">
+                    Chat with people without creating an account.
+                </p>
+
+                <form id="usernameForm">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter your username"
+                        maxlength="30"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <button type="submit">
+                        Continue
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROOM SCREEN -->
+        <section class="screen hidden" id="roomScreen">
+
+            <div class="card">
+
+                <div class="logo">
+                    🔐
+                </div>
+
+                <h1>Choose a Room</h1>
+
+                <p class="welcome" id="welcomeText"></p>
+
+
+                <!-- JOIN ROOM -->
+
+                <form id="joinRoomForm">
+
+                    <label for="roomCode">
+                        Room Code
+                    </label>
+
+                    <input
+                        type="text"
+                        id="roomCode"
+                        placeholder="Enter room code"
+                        maxlength="6"
+                        autocomplete="off"
+                    >
+
+                    <button type="submit">
+                        Join Room
+                    </button>
+
+                </form>
+
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+
+                <!-- CREATE ROOM -->
+
+                <button
+                    class="create-button"
+                    id="createRoomButton"
+                    type="button"
+                >
+                    Create New Room
+                </button>
+
+
+                <p
+                    class="error-message"
+                    id="errorMessage"
+                ></p>
+
+                <p
+                    class="status-message"
+                    id="statusMessage"
+                ></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="theme.js"></script>
+    <script src="index.js"></script>
+
+</body>
+
+</html>

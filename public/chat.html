@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Anonymous Chat</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("pingTheme");
+            document.documentElement.dataset.theme =
+                savedTheme === "dark" ? "dark" : "light";
+        })();
+    </script>
+
+</head>
+
+
+<body>
+
+    <main class="chat-app">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="chat-header">
+
+            <div class="header-left">
+
+                <div class="chat-logo">
+                    💬
+                </div>
+
+                <div>
+
+                    <div class="chat-title">
+                        Anonymous Chat
+                    </div>
+
+                    <button
+                        class="room-code"
+                        id="roomCode"
+                        type="button"
+                    >
+                        ------
+
+                        <span>
+                            Copy
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    class="theme-toggle chat-theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch to dark theme"
+                    title="Switch theme"
+                >
+                    <span class="theme-icon" aria-hidden="true">🌙</span>
+                    <span class="theme-label">Dark</span>
+                </button>
+
+                <div class="members-wrapper">
+
+                    <button
+                        class="members-button"
+                        id="membersButton"
+                        type="button"
+                    >
+
+                        <span>
+                            👥
+                        </span>
+
+                        <span
+                            id="memberCount"
+                        >
+                            0
+                        </span>
+
+                        <span>
+                            Members
+                        </span>
+
+                        <span>
+                            ▾
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        class="members-dropdown hidden"
+                        id="membersDropdown"
+                    >
+
+                        <div class="dropdown-header">
+                            Room Members
+                        </div>
+
+                        <div
+                            id="membersList"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="leave-button"
+                    id="leaveButton"
+                    type="button"
+                >
+                    Leave
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= ADMIN REQUESTS ================= -->
+
+        <section
+            class="requests-panel hidden"
+            id="requestsPanel"
+        >
+
+            <div class="requests-heading">
+
+                <div>
+
+                    <h3>
+                        Join Requests
+                    </h3>
+
+                    <p>
+                        People waiting to enter
+                        this room
+                    </p>
+
+                </div>
+
+                <span
+                    class="request-count"
+                    id="requestCount"
+                >
+                    0
+                </span>
+
+            </div>
+
+
+            <div id="requestsList">
+            </div>
+
+        </section>
+
+
+        <!-- ================= CHAT ================= -->
+
+        <section
+            class="messages"
+            id="messages"
+        >
+        </section>
+
+
+        <!-- ================= FILE INPUT ================= -->
+
+        <input
+            type="file"
+            id="fileInput"
+            hidden
+        >
+
+
+        <!-- ================= INPUT ================= -->
+
+        <form
+            class="message-form"
+            id="messageForm"
+        >
+
+            <select
+                id="messageTimer"
+                title="Message lifetime"
+            >
+
+                <option value="0">
+                    ∞
+                </option>
+
+                <option value="5">
+                    ⏱ 5s
+                </option>
+
+                <option value="10">
+                    ⏱ 10s
+                </option>
+
+                <option value="30">
+                    ⏱ 30s
+                </option>
+
+                <option value="60">
+                    ⏱ 1m
+                </option>
+
+                <option value="300">
+                    ⏱ 5m
+                </option>
+
+            </select>
+
+
+            <!-- FILE BUTTON -->
+
+            <button
+                class="file-button"
+                id="fileButton"
+                type="button"
+                title="Share file or image"
+            >
+                📎
+            </button>
+
+
+            <input
+                id="messageInput"
+                type="text"
+                placeholder="Write a message..."
+                maxlength="2000"
+                autocomplete="off"
+            >
+
+
+            <button
+                id="sendButton"
+                type="submit"
+            >
+                Send
+            </button>
+
+        </form>
+
+
+        <!-- ================= UPLOAD STATUS ================= -->
+
+        <div
+            class="upload-status hidden"
+            id="uploadStatus"
+        >
+
+            <div
+                class="upload-spinner"
+            >
+            </div>
+
+            <span id="uploadText">
+                Sending file...
+            </span>
+
+        </div>
+
+
+    </main>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="theme.js"></script>
+    <script src="chat.js"></script>
+
+</body>
+
+</html>
