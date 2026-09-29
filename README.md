@@ -1,1 +1,1 @@
-live linkL: https://ping-chat-louq.onrender.com/
+live link: https://ping-chat-louq.onrender.com/
